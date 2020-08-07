@@ -6,6 +6,7 @@ This project was created to overcome a solution for Monitoring a Router with Dyn
 Issues :
 - deviceUptime parser return empty value (zero)
 - uptimeseconds script seems to not working
+
 To-Do :
 - complete grafana dashboard visualization
 - add more metric collecting system in script
