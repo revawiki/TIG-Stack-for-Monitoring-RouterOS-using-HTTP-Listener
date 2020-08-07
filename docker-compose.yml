@@ -9,6 +9,7 @@ networks:
 
 services:
     influxdb:
+        container_name: tig-influxdb
         image: influxdb
         privileged: false
         ports:
@@ -27,6 +28,7 @@ services:
               - influxdb
 
     grafana:
+        container_name: tig-grafana
         image: grafana/grafana
         privileged: false
         ports:
@@ -39,11 +41,13 @@ services:
               - grafana
 
     telegraf:
+        container_name: tig-telegraf
         image: telegraf
         privileged: false
         restart: always
         ports:
           - '8080:8080'
+          - '8081:8081'
         volumes:
             - ./conf/telegraf.conf:/etc/telegraf/telegraf.conf
         networks:
