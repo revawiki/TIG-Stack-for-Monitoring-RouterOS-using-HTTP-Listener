@@ -2,6 +2,14 @@
 
 This project was created to overcome a solution for Monitoring a Router with Dynamic IP Public, where SNMP can't be implemented. Project was created using TIG Stack running on Docker. RouterOS used for the experiment was virtualized using Virtualbox. Telegraf with HTTP Listener plugin (link below) was used for metrics collecting agent, while RouterOS HTTP Fetcher was used for information relay.  
 
+## Current Issues and To-Do List (August 7th 2020)
+Issues :
+- deviceUptime parser return empty value (zero)
+- uptimeseconds script seems to not working
+To-Do :
+- complete grafana dashboard visualization
+- add more metric collecting system in script
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
@@ -18,13 +26,16 @@ $ git clone https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-
 
 3. Go to the cloned directory, and execute this bashfile (with Docker running in the background).
 ```
-$ docker-compose up
+$ ./up.sh
 ```
 
 ### Setting-Up the RouterOS
 
+Guide to virtualize RouterOS on the Virtualbox for setting up the simulation environtment.
+(not yet published)
 
 #### Expected visual
+(not yet captured)
 ![Grafana-Dashboard]()
 
 ## Built With
