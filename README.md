@@ -22,6 +22,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing and Running TIG-Stacks
 
+Guide to set-up TIG-stacks that run as a docker container.
+
 1. Install Docker & Docker-Compose if it hasn't been installed on your machine and run it.\
 [Docker Install](https://docs.docker.com/get-docker/) & [Docker-Compose Install](https://docs.docker.com/compose/install/)
 
@@ -34,16 +36,25 @@ $ git clone https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-
 ```
 $ ./up.sh
 ```
-4. With browser, access grafana via (http://localhost:3000), login with default password (admin)
+4. With your browser, access grafana via (http://localhost:3000), login with default password (admin)
 
 5. Create new datasource and choose InfluxDB. Fill url with (http://influxdb:8086). Database name, username and password available in [.env](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/.env) file.
 
-6. Create new dashboard and import dashboard template by copy-paste [dashboard.json] (https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/template/dashboard.json) file via dashboard settings.
+6. Create new dashboard and import dashboard template by copy-paste [dashboard.json](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/template/dashboard.json) file via dashboard settings.
 
 ### Setting-Up the RouterOS
 
 Guide to virtualize RouterOS on the Virtualbox for setting up the simulation environtment.
-(not yet published)
+
+1. Install Virtualbox [here](https://www.virtualbox.org/wiki/Downloads) & download RouterOS image [here](https://mikrotik.com/download/archive).
+
+2. Install RouterOS in virtualbox, and set-up the connectivity with the guide from "Virtualbox set-up for docker" under the credits section.
+
+3. With your browser, access Mikrotik webfig via your guest host-only IP.
+
+4. Go to System, add a new Script and use [routerOS.rsc](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/routerOS/routerOS.rsc) as the source field then create a Scheduler to run the newly added script within interval (10-30s example).
+
+5. Enable the Scheduler and try to run it at least once.
 
 #### Expected visual
 ![Grafana-Dashboard](https://raw.githubusercontent.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/master/image/visualization.png)
@@ -60,7 +71,8 @@ Guide to virtualize RouterOS on the Virtualbox for setting up the simulation env
 ## Credits
 
 * [Jitsi-Monitoring](https://github.com/haidlir/jitsi-monitoring) by Haidlir Naqvi.
-* [Telegraf HTTP Listener plugin use case for Solar Panel Monitoring](https://thenewstack.io/how-i-created-a-telegraf-plugin-to-monitor-solar-panels/) by Julius Marozas.
+* [Telegraf HTTP Listener plugin use case](https://thenewstack.io/how-i-created-a-telegraf-plugin-to-monitor-solar-panels/) by Julius Marozas.
+* [Virtualbox set-up for docker on host connectivity](http://pinter.org/archives/7719) by Lazlo Pinter
 
 
 ##### Question/Inquiries
