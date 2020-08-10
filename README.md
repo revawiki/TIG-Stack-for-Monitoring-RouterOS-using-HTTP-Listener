@@ -34,9 +34,9 @@ $ git clone https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-
 ```
 $ ./up.sh
 ```
-4. With browser, access grafana via (http//localhost:3000), login with default password (admin)
+4. With browser, access grafana via (http://localhost:3000), login with default password (admin)
 
-5. Create new datasource and choose InfluxDB. Fill url with (http://influxdb:3000). Database name, username and password available in [.env](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/.env) file.
+5. Create new datasource and choose InfluxDB. Fill url with (http://influxdb:8086). Database name, username and password available in [.env](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/.env) file.
 
 6. Create new dashboard and import dashboard template by copy-paste [dashboard.json] (https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/template/dashboard.json) file via dashboard settings.
 
