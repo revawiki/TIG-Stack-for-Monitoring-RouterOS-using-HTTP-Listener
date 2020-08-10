@@ -1,4 +1,12 @@
+# RouterOS automatic HTTP fetcher for TIG-Stacks
+
+# Scripting options below
+# ~
+
+# Metrics to Collect
+
 # -- Device Uptime --
+
 # Gather basic router info
 :local name [/system identity get name];
 :local uptime [/system resource get uptime];
@@ -14,12 +22,13 @@
 :local hours [:pick $time 0 2];
 :local minutes [:pick $time 3 5];
 :local seconds [:pick $time 6 8];
-:local uptimeseconds [($weeks*86400*7) + ($days*86400) + ($hours*3600) + ($minutes*60) + ($seconds)];
+:local uptimeseconds [(($weeks*86400*7) + ($days*86400) + ($hours*3600) + ($minutes*60) + $seconds)];
 
 # Fetch device uptime info via http
 /tool fetch mode=http http-method=post http-header-field="content-type:application/json" url="http://192.168.56.1:8080/router" http-data="{\"deviceName\" : \"$name\", \"deviceUptime\" : $uptimeseconds}";
 
 # -- Interface Traffic --
+
 # Set variable for interface traffic info
 :local name [/system identity get name]
 :local ifname
@@ -43,4 +52,5 @@
 /tool fetch mode=http http-method=post http-header-field="content-type:application/json" url="http://192.168.56.1:8081/router" http-data="{\"deviceName\" : \"$name\", \"interfaceName\" : \"$ifname\", \"txSpeed\" : $kbpstx, \"rxSpeed\" : $kbpsrx}";
 
 }
+
 
