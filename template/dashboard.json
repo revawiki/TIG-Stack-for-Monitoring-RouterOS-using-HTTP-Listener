@@ -19,28 +19,200 @@
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgb(255, 255, 255)",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 7,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^deviceIdentity$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "deviceIdentity"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Device Name",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "dark-red",
+                "value": 60
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 7,
+        "x": 7,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^CPU Load$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "alias": "CPU Load",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "systemCPULoad"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Load",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {
+        "Memory Usage": "green",
+        "Total Memory": "dark-purple"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "unit": "s"
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
         },
         "overrides": []
       },
-      "fill": 1,
+      "fill": 4,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 7,
-        "x": 0,
+        "h": 4,
+        "w": 5,
+        "x": 14,
         "y": 0
       },
       "hiddenSeries": false,
-      "id": 2,
+      "id": 14,
       "legend": {
         "avg": false,
         "current": false,
@@ -64,18 +236,20 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "Uptime",
+          "alias": "Memory Usage",
           "groupBy": [],
-          "measurement": "deviceUptime",
+          "measurement": "deviceTimeSeries",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT sum(\"systemTotalRAM\") FROM \"deviceTimeSeries\" WHERE (\"deviceCode\" = 'router-001') AND $timeFilter",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "deviceUptime"
+                  "systemUsageRAM"
                 ],
                 "type": "field"
               }
@@ -83,27 +257,52 @@
           ],
           "tags": [
             {
-              "key": "deviceName",
+              "key": "deviceCode",
               "operator": "=",
-              "value": "MikroTik"
+              "value": "router-001"
+            }
+          ]
+        },
+        {
+          "alias": "Total Memory",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "systemTotalRAM"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
             }
           ]
         }
       ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [
+      "thresholds": [
         {
-          "colorMode": "background6",
+          "colorMode": "critical",
           "fill": true,
-          "fillColor": "rgba(234, 112, 112, 0.12)",
-          "line": false,
-          "lineColor": "rgba(237, 46, 24, 0.60)",
-          "op": "time"
+          "line": true,
+          "op": "lt",
+          "yaxis": "left"
         }
       ],
+      "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
-      "title": "Device Uptime",
+      "title": "Memory Usage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -119,7 +318,7 @@
       },
       "yaxes": [
         {
-          "format": "s",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -141,7 +340,336 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "Storage Usage": "green",
+        "Total Memory": "red",
+        "Total Storage": "dark-purple"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "fill": 4,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "percentage": false,
+      "pluginVersion": "7.1.1",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "Storage Usage",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT sum(\"systemTotalRAM\") FROM \"deviceTimeSeries\" WHERE (\"deviceCode\" = 'router-001') AND $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "systemUsageHDD"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            }
+          ]
+        },
+        {
+          "alias": "Total Storage",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "systemTotalHDD"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Storage Usage",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgb(255, 255, 255)",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 0,
+        "y": 2
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "alias": "Uptime",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "deviceUptime"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Uptime",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgb(255, 255, 255)",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 3,
+        "y": 2
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.1.1",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "systemVersion"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "System Version",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Net Traffic",
+      "type": "row"
+    },
+    {
+      "aliasColors": {
+        "Input": "green",
+        "Output": "blue"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -156,10 +684,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 8,
-        "x": 7,
-        "y": 0
+        "x": 0,
+        "y": 5
       },
       "hiddenSeries": false,
       "id": 4,
@@ -187,35 +715,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "Output",
-          "groupBy": [],
-          "measurement": "deviceTraffic",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "txSpeed"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "interfaceName",
-              "operator": "=",
-              "value": "ether1"
-            }
-          ]
-        },
-        {
           "alias": "Input",
           "groupBy": [],
-          "measurement": "deviceTraffic",
+          "measurement": "deviceTimeSeries",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -224,7 +726,7 @@
             [
               {
                 "params": [
-                  "rxSpeed"
+                  "trafficRxSpeed"
                 ],
                 "type": "field"
               }
@@ -232,9 +734,47 @@
           ],
           "tags": [
             {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            },
+            {
+              "condition": "AND",
               "key": "interfaceName",
               "operator": "=",
-              "value": "ether1"
+              "value": "ether2"
+            }
+          ]
+        },
+        {
+          "alias": "Output",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "trafficTxSpeed"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            },
+            {
+              "condition": "AND",
+              "key": "interfaceName",
+              "operator": "=",
+              "value": "ether2"
             }
           ]
         }
@@ -243,7 +783,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Ethernet 1",
+      "title": "Internet",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -281,11 +821,15 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "Input": "green",
+        "Output": "blue"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -296,13 +840,13 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 15,
-        "y": 0
+        "h": 7,
+        "w": 16,
+        "x": 8,
+        "y": 5
       },
       "hiddenSeries": false,
-      "id": 5,
+      "id": 16,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -327,35 +871,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "Output",
-          "groupBy": [],
-          "measurement": "deviceTraffic",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "txSpeed"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "interfaceName",
-              "operator": "=",
-              "value": "ether2"
-            }
-          ]
-        },
-        {
           "alias": "Input",
           "groupBy": [],
-          "measurement": "deviceTraffic",
+          "measurement": "deviceTimeSeries",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -364,7 +882,7 @@
             [
               {
                 "params": [
-                  "rxSpeed"
+                  "trafficRxSpeed"
                 ],
                 "type": "field"
               }
@@ -372,9 +890,47 @@
           ],
           "tags": [
             {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            },
+            {
+              "condition": "AND",
               "key": "interfaceName",
               "operator": "=",
-              "value": "ether2"
+              "value": "ether1"
+            }
+          ]
+        },
+        {
+          "alias": "Output",
+          "groupBy": [],
+          "measurement": "deviceTimeSeries",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "trafficTxSpeed"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "deviceCode",
+              "operator": "=",
+              "value": "router-001"
+            },
+            {
+              "condition": "AND",
+              "key": "interfaceName",
+              "operator": "=",
+              "value": "ether1"
             }
           ]
         }
@@ -383,7 +939,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Ethernet 2",
+      "title": "Local",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -421,7 +977,7 @@
       }
     }
   ],
-  "refresh": "30s",
+  "refresh": "10s",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -429,7 +985,7 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -446,7 +1002,7 @@
     ]
   },
   "timezone": "",
-  "title": "routerOs",
+  "title": "routerOS",
   "uid": "HYClpIIMk",
   "version": 2
 }
