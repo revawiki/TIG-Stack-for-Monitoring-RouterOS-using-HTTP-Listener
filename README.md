@@ -2,19 +2,19 @@
 
 This project was created to overcome a solution for Monitoring a Router with Dynamic IP Public, where SNMP can't be implemented. Project was created using TIG Stack running on Docker. RouterOS used for the experiment was virtualized using Virtualbox. Telegraf with HTTP Listener plugin was used for metrics collecting agent, while RouterOS HTTP Fetcher was used for information relay.  
 
-#### Current Issues and To-Do List (August 10th 2020)
+#### Current Issues and To-Do List (August 13th 2020)
 Checkpoint :
-- Fix issues with uptime script
-- Update github documentation
+- Added more metrics collection agent for system info
+- Completed to visualizing and optimizing the dashboard for more metrics collected
+- Improved overall plugin parser and router scripting
+- Updated github documentation
 
 Issues :
-- ~deviceUptime parser return empty value (zero)~
-- ~uptimeseconds script seems to not working~
+[None]
 
 To-Do :
-- ~complete grafana dashboard visualization~
-- add more metric collecting system in script
-- visualize more metric collected
+- Add noSQL database for non-timeseries metrics collection (presumably MongoDB)
+- Create script for the non-timeseries metrics info parses
 
 ## Getting Started
 
@@ -52,12 +52,12 @@ Guide to virtualize RouterOS on the Virtualbox for setting up the simulation env
 
 3. With your browser, access Mikrotik webfig via your guest host-only IP.
 
-4. Go to System, add a new Script and use [routerOS.rsc](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/routerOS/routerOS.rsc) as the source field then create a Scheduler to run the newly added script within interval (10-30s example).
+4. Go to System, add a new Script and use [deviceTimeSeries.rsc](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/script/deviceTimeSeries.rsc) as the source field then create a Scheduler to run the newly added script within interval (10-30s example).
 
-5. Enable the Scheduler and try to run it at least once.
+5. Enable the Scheduler and try to run the Script at least once.
 
 #### Expected visual
-![Grafana-Dashboard](https://raw.githubusercontent.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/master/image/visualization.png)
+![Grafana-Dashboard-2.0](https://raw.githubusercontent.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/master/image/visualization-2.png)
 
 ## Built With
 
