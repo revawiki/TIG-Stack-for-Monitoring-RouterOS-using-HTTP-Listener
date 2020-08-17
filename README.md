@@ -2,20 +2,6 @@
 
 This project was created to overcome a solution for Monitoring a Router with Dynamic IP Public, where SNMP can't be implemented. Project was created using TIG Stack running on Docker. RouterOS used for the experiment was virtualized using Virtualbox. Telegraf with HTTP Listener plugin was used for metrics collecting agent, while RouterOS HTTP Fetcher was used for information relay.  
 
-#### Current Issues and To-Do List (August 13th 2020)
-Checkpoint :
-- Added more metrics collection agent for system info
-- Completed to visualizing and optimizing the dashboard for more metrics collected
-- Improved overall plugin parser and router scripting
-- Updated github documentation
-
-Issues :
-[None]
-
-To-Do :
-- Add noSQL database for non-timeseries metrics collection (presumably MongoDB)
-- Create script for the non-timeseries metrics info parses
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
