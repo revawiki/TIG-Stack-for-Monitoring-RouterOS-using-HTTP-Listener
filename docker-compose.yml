@@ -29,12 +29,14 @@ services:
 
     grafana:
         container_name: tig-grafana
-        image: grafana/grafana
+        image: ketitik/grafana:dev
         privileged: false
         ports:
             - '3000:3000'
         volumes:
             - grafana-storage:/var/lib/grafana
+            - ./config/grafana/provisioning:/etc/grafana/provisioning
+            - ./config/grafana/template:/var/lib/grafana/dashboards
         networks:
           tig: 
             aliases:
@@ -48,7 +50,7 @@ services:
         ports:
           - '8080:8080'
         volumes:
-            - ./config/telegraf.conf:/etc/telegraf/telegraf.conf
+            - ./config/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
         networks:
           tig: 
            aliases:
