@@ -24,10 +24,6 @@ $ ./up.sh
 ```
 4. With your browser, access grafana via (http://localhost:3000), login with default password (admin)
 
-5. Create new datasource and choose InfluxDB. Fill url with (http://influxdb:8086). Database name, username and password available in [.env](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/.env) file.
-
-6. Create new dashboard and import dashboard template by copy-paste [dashboard.json](https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/blob/master/template/dashboard.json) file via dashboard settings.
-
 ### Setting-Up the RouterOS
 
 Guide to virtualize RouterOS on the Virtualbox for setting up the simulation environtment.
@@ -43,7 +39,7 @@ Guide to virtualize RouterOS on the Virtualbox for setting up the simulation env
 5. Enable the Scheduler and try to run the Script at least once.
 
 #### Expected visual
-![Grafana-Dashboard-2.0](https://raw.githubusercontent.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/master/image/visualization-2.png)
+![Grafana-Dashboard-New](https://raw.githubusercontent.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener/master/image/visualization-new.png)
 
 ## Built With
 
