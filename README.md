@@ -15,7 +15,7 @@ Guide to set-up TIG-stacks that run as a docker container.
 
 2. Clone this repository into your machine.
 ```
-$ git clone https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener
+$ git clone https://github.com/revawiki/TIG-Stack-for-Monitoring-RouterOS-using-HTTP-Listener.git
 ```
 
 3. Go to the cloned directory, and execute this bashfile (with Docker running in the background).
